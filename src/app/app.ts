@@ -1,16 +1,36 @@
-import { Component, signal } from '@angular/core';
-import { Banner } from "./banner/banner";
-import { FormNovaTransacao } from "./form-nova-transacao/form-nova-transacao";
-import { Transacao } from './modelos/transacao';
+import { Component, computed, signal } from '@angular/core';
+import { Banner } from './banner/banner';
+import { FormNovaTransacao } from './form-nova-transacao/form-nova-transacao';
+import { TipoTransacao, Transacao } from './modelos/transacao';
 
 @Component({
   selector: 'app-root',
   imports: [Banner, FormNovaTransacao],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
+  transacaoes = signal<Transacao[]>([]);
+
+  saldo = computed(() => {
+    return this.transacaoes().reduce((acc, transacaoAtual) => {
+      switch (transacaoAtual.tipo) {
+        case TipoTransacao.DEPOSITO:
+          return acc + transacaoAtual.valor;
+
+        case TipoTransacao.SAQUE:
+          return acc - transacaoAtual.valor;
+      
+        default:
+          throw new Error('Tipo de transação inválido');
+      }
+    }, 0);
+  });
+
   processarTransacao(transacao: Transacao) {
-    console.log(transacao);
+    if (transacao.tipo === TipoTransacao.SAQUE && transacao.valor > this.saldo()) {
+      return alert('Saldo insuficiente para realizar o saque.');
+    }
+    this.transacaoes.update((listaAtual) => [transacao, ...listaAtual]);
   }
 }
