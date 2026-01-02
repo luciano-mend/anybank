@@ -2,18 +2,19 @@ import { Component, computed, signal } from '@angular/core';
 import { Banner } from './banner/banner';
 import { FormNovaTransacao } from './form-nova-transacao/form-nova-transacao';
 import { TipoTransacao, Transacao } from './modelos/transacao';
+import { Extrato } from "./extrato/extrato";
 
 @Component({
   selector: 'app-root',
-  imports: [Banner, FormNovaTransacao],
+  imports: [Banner, FormNovaTransacao, Extrato],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  transacaoes = signal<Transacao[]>([]);
+  transacoes = signal<Transacao[]>([]);
 
   saldo = computed(() => {
-    return this.transacaoes().reduce((acc, transacaoAtual) => {
+    return this.transacoes().reduce((acc, transacaoAtual) => {
       switch (transacaoAtual.tipo) {
         case TipoTransacao.DEPOSITO:
           return acc + transacaoAtual.valor;
@@ -31,6 +32,6 @@ export class App {
     if (transacao.tipo === TipoTransacao.SAQUE && transacao.valor > this.saldo()) {
       return alert('Saldo insuficiente para realizar o saque.');
     }
-    this.transacaoes.update((listaAtual) => [transacao, ...listaAtual]);
+    this.transacoes.update((listaAtual) => [transacao, ...listaAtual]);
   }
 }

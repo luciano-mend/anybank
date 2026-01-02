@@ -11,8 +11,15 @@ O **Anybank** é uma aplicação front-end moderna desenvolvida com Angular, sim
 *   **Exibição de Saldo Dinâmico:** Apresenta o saldo atual da conta, calculado em tempo real a partir do histórico de transações.
 *   **Boas-vindas Personalizado:** Saúda o usuário com uma mensagem de boas-vindas e exibe a data atual.
 *   **Registro de Novas Transações:** Permite que o usuário realize novas transações financeiras (Depósitos e Saques) através de um formulário intuitivo.
+*   **Visualização do Extrato:** Apresenta um histórico detalhado de todas as transações realizadas.
 *   **Validação de Saldo:** O sistema valida se o usuário possui saldo suficiente antes de permitir uma transação de saque.
 *   **Histórico de Transações:** Todas as transações são mantidas em uma lista, e o saldo é um reflexo dessa lista.
+
+## 🎨 Design
+
+O layout e o design do projeto foram baseados em um protótipo no Figma, que pode ser acessado através do seguinte link:
+
+- [Figma - Anybank](https://www.figma.com/design/VeulkY3rtv0wD8LlbGmwAg/Angular-19--Inputs--Outputs-e-Content-Projection-%7C-Anybank--Community-?node-id=503-4264&p=f&t=FWpmsvGIS5Evn8BY-0)
 
 ## Tecnologias Utilizadas
 
@@ -30,6 +37,7 @@ src/
 │   ├── banner/             # Componente do banner superior
 │   │   ├── boas-vindas/    # Componente de boas vindas
 │   │   └── conta/          # Componente de exibição de saldo
+│   ├── extrato/            # Componente que exibe o extrato de transações
 │   ├── form-nova-transacao/ # Formulário para novas transações
 │   ├── modelos/            # Modelos de dados da aplicação (ex: Transacao)
 │   ├── app.config.ts

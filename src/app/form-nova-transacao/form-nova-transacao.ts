@@ -28,6 +28,5 @@ export class FormNovaTransacao {
 
     this.tipoTransacao = "";
     this.valorTransacao = "";
-    //https://www.figma.com/design/VeulkY3rtv0wD8LlbGmwAg/Angular-19--Inputs--Outputs-e-Content-Projection-%7C-Anybank--Community-?node-id=503-4264&p=f&t=FWpmsvGIS5Evn8BY-0
   }
 }
